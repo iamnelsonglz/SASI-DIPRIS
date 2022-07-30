@@ -37,13 +37,13 @@ $(document).ready(function () {
         e.preventDefault();  
             let template = '';
             template += `
-                    <div>
-                        <label for="nombre"><b>NOMBRE</b></label>
-                        <input type="search" name="nombre" placeholder="Ingrese el nombre" id="nombre">     
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="nombre"><b>NOMBRE</b></label>
+                        <input class="modal__item__in modal__item__txt" type="search" name="nombre" placeholder="Ingrese el nombre" id="nombre">     
                     </div>
-                    <div>
-                        <label for="planta"><b>PLANTA</b></label>
-                        <input type="number" name="planta" placeholder="Ingrese planta o piso" id="planta">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="planta"><b>PLANTA</b></label>
+                        <input class="modal__item__in modal__item__txt" type="number" name="planta" placeholder="Ingrese planta o piso" id="planta">
                     </div>
                     `;
             $('#modal-body').html(template);
@@ -53,7 +53,7 @@ $(document).ready(function () {
             template += `
             <div></div>
             <div>
-                <button type="submit" class="btn btn-add btn-modal"> <i class="fa-regular fa-floppy-disk"></i> Guardar departamento</button>
+                <button type="submit" class="btn-modal item__modal btn-add"> <i class="fa-regular fa-floppy-disk"></i> Guardar departamento</button>
             </div>
             `;
             $('#modal-footer').html(template);

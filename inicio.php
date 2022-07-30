@@ -176,12 +176,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Solicitudes en espera</b></span>
+                            <span class="card__item_tittle">Solicitudes en espera</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-esp mini-txt">
-                            
+                        <ul class="scoreboard-esp card__item">
                             <li><i class="fa-solid fa-clock"></i> Total: 0</li>
                         </ul>
                     </div>
@@ -199,12 +198,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Solicitudes finalizadas hoy</b></span>
+                            <span class="card__item_tittle">Solicitudes finalizadas</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-fin mini-txt">
-                            <li><i class="fa-solid fa-circle-check"></i> Total: 0</li>
+                        <ul class="scoreboard-fin card__item">
+                            <li><i class="fa-solid fa-circle-check"></i> Total de hoy: 0</li>
                         </ul>
                     </div>
                 </div>
@@ -221,18 +220,18 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Solicitudes en atención</b></span>
+                            <span class="card__item_tittle">Solicitudes en atención</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-aten mini-txt">
+                        <ul class="scoreboard-aten card__item">
                             
                             <li><i class="fa-solid fa-bell-concierge"></i> Total: 0</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card card__listasoporte">
                     <div class="tools">
                         <div class="circle">
                             <span class="red box"></span>
@@ -244,21 +243,20 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Usuarios de soporte</b></span>
+                            <span class="card__item_tittle">Usuarios de soporte</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-listsoport mini-txt">
+                        <ul class="scoreboard-listsoport card__item">
                             
                         </ul>
                     </div>
                 </div>
-                </div>
-                <br>
-                <br>
+            </div>
+                
                 <form action="/reportes/" method="POST" id="formulario">
-                <div class="card__tres">
-                <div class="card">
+            <div class="card__tres">
+                <div class="card__withitems">
                     <div class="tools">
                         <div class="circle">
                             <span class="red box"></span>
@@ -270,16 +268,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Filtrar solicitudes por estado</b></span>
+                            <span class="card__item_tittle">Filtrar solicitudes por estado</span>
                         </div>
                     </div>
-                    <div class="card__content">
-                        <select name="where" class="in media-in" id="where"></select>
-                        <button class="btn media-btn" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                    <div class="card__content card__fragment__mitad">
+                        <select name="where" class="card__input__mitad" id="where"></select>
+                        <button class="btn card__input__mitad" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card__withitems">
                     <div class="tools">
                         <div class="circle">
                             <span class="red box"></span>
@@ -291,22 +289,26 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Filtrar solicitudes por fecha</b></span>
+                            <span class="card__item_tittle">Filtrar solicitudes por fecha</span>
                         </div>
                     </div>
-                    <div class="card__content card__dos">
-                        <div>
-                        <label for="fechainicio" class="txt mini-txt">Fecha inicio</label>
-                        <input type="date" class="in mini-in" name="fechainicio" id="fechainicio"/>
+                    <div class="card__content card__fragment__tres">
+
+                        <div class="card__fragment__fecha">
+                        <label for="fechainicio" class="card__input__mitad">Fecha de inicio</label>
+                        <input type="date" class="in card__input__mitad" name="fechainicio" id="fechainicio"/>
                         </div>
-                        <div>
-                        <label for="fechafin" class="txt mini-txt">Fecha fin</label>
-                        <input type="date" class="in mini-in" name="fechafin"  id="fechafin"/>
+
+                        <div class="card__fragment__fecha">
+                        <label for="fechafin" class="card__input__mitad">Fecha de fin</label>
+                        <input type="date" class="in card__input__mitad" name="fechafin"  id="fechafin"/>
                         </div>
-                        <div>
-                        <button class="btn mini-in" id="filter-button"><i class="fa-solid fa-filter"></i> Filtrar</button>
-                        <button type="submit" class="btn mini-in" id="filter-pdf-button"><i class="fa-solid fa-file-pdf"></i> Generar reporte</button>
+
+                        <div class="card__fragment__fecha">
+                        <button class="btn card__input__mitad" id="filter-button"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                        <button type="submit" class="btn card__input__mitad" id="filter-pdf-button"><i class="fa-solid fa-file-pdf"></i> Reporte</button>
                         </div>
+
                     </div>
                 </div>
                 <div></div>
@@ -314,8 +316,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                 </div>
 
                 </form>
-                
-                    <p><br></p>   
                     <div id="loadtabla" class="loading">
                         <svg viewBox="25 25 50 50">
                         <circle r="20" cy="50" cx="50"></circle>
@@ -349,7 +349,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                         </div>
                     </div>
                     <script src="../js/reporteadmin.js"></script>
-                </div>
+            </div>
 
             <?php
                 // Si el usuario es de informatica
@@ -357,7 +357,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
             ?>
                 <!-- Tabla con reportes registrados -->
                 
-                <div class="content">
+            <div class="content">
+            <div class="card__tres__full">
                 <div class="card">
                     <div class="tools">
                         <div class="circle">
@@ -370,11 +371,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Solicitudes en espera</b></span>
+                            <span class="card__item_tittle">Solicitudes en espera</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-esp mini-txt">
+                        <ul class="scoreboard-esp card__item">
                             
                             <li><i class="fa-solid fa-clock"></i> Total: 0</li>
                         </ul>
@@ -393,11 +394,11 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Solicitudes finalizadas hoy</b></span>
+                            <span class="card__item_tittle">Solicitudes finalizadas hoy</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-fin mini-txt">
+                        <ul class="scoreboard-fin card__item">
                             <li><i class="fa-solid fa-circle-check"></i> Total: 0</li>
                         </ul>
                     </div>
@@ -415,19 +416,19 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Solicitudes en atención</b></span>
+                            <span class="card__item_tittle">Solicitudes en atención</span>
                         </div>
                     </div>
                     <div class="card__content">
-                        <ul class="scoreboard-aten mini-txt">
+                        <ul class="scoreboard-aten card__item">
                             
                             <li><i class="fa-solid fa-bell-concierge"></i> Total: 0</li>
                         </ul>
                     </div>
                 </div>
-                <br>
-                <br>
-                <div class="card">
+            </div>    
+            <div class="card__tres">
+                <div class="card__withitems">
                     <div class="tools">
                         <div class="circle">
                             <span class="red box"></span>
@@ -439,19 +440,29 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Filtrar solicitudes por estado</b></span>
+                            <span class="card__item_tittle"><b>Filtrar solicitudes por estado</b></span>
                         </div>
                     </div>
-                    <div class="card__content">
-                        <input checked type="radio" name="radOverclock" id="radio1" class="in mini-in" />
-                        <label for="radio1" class="mini-txt">Espera o Atención</label>
-                        <input type="radio" name="radOverclock" id="radio2" class="in mini-in"/>
-                        <label for="radio2" class="mini-txt">Finalizado</label>
-                        <button class="btn mini-in" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                    <div class="card__content card__tres__filtro">
+                        <div>
+                        <input checked type="radio" name="radOverclock" id="radio1" class="card__input__mitad" />
+                        </div>
+                        <div>
+                        <label for="radio1" class="card__input__mitad">Espera o Atención</label>
+                        </div>
+                        <div>
+                        <input type="radio" name="radOverclock" id="radio2" class=" card__input__mitad"/>
+                        </div>
+                        <div>
+                        <label for="radio2" class="card__input__mitad">Finalizado</label>
+                        </div>
+                        <div>
+                        <button class="btn card__input__mitad" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card__withitems">
                     <div class="tools">
                         <div class="circle">
                             <span class="red box"></span>
@@ -463,21 +474,24 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Filtrar solicitudes por fecha</b></span>
+                            <span class="card__item_tittle"><b>Filtrar solicitudes por fecha</b></span>
                         </div>
                     </div>
-                    <div class="card__content">
-                        
-                        <label for="fechainicio" class="txt mini-txt">Fecha inicio</label>
-                        <input type="date" class="in mini-in" name="fechainicio" id="fechainicio"/>
-                        
-                        <label for="fechafin" class="txt mini-txt">Fecha fin</label>
-                        <input type="date" class="in mini-in" name="fechafin"  id="fechafin"/>
-                        
-                        <button class="btn mini-in" id="filter-button"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                    <div class="card__fragment__tres">
+                        <div class="card__fragment__fecha">
+                        <label for="fechainicio" class="card__input__mitad">Fecha inicio</label>
+                        <input type="date" class="card__input__mitad" name="fechainicio" id="fechainicio"/>
+                        </div>
+                        <div class="card__fragment__fecha">    
+                        <label for="fechafin" class="card__input__mitad">Fecha fin</label>
+                        <input type="date" class="card__input__mitad" name="fechafin"  id="fechafin"/>
+                        </div>
+                    <div class="card__fragment__fecha">    
+                        <button class="btn card__input__mitad" id="filter-button"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                    </div>
                     </div>
                 </div>
-                    <p><br></p>   
+            </div>    
                     <div id="loadtabla" class="loading">
                         <svg viewBox="25 25 50 50">
                         <circle r="20" cy="50" cx="50"></circle>
@@ -527,9 +541,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
             ?>
             <div class="content">
 
-            <div class="content">
-                
-                <div class="card">
+            <div class="card__tres">
+                <div class="card__withitems">
                     <div class="tools">
                         <div class="circle">
                             <span class="red box"></span>
@@ -541,47 +554,58 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <span class="green box"></span>
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Filtrar solicitudes por estado</b></span>
+                            <span class="card__item_tittle"><b>Filtrar solicitudes por estado</b></span>
                         </div>
                     </div>
-                    <div class="card__content">
-                        <input checked type="radio" name="radOverclock" id="radio1" class="in mini-in" />
-                        <label for="radio1" class="mini-txt">Espera o Atención</label>
-                        <input type="radio" name="radOverclock" id="radio2" class="in mini-in"/>
-                        <label for="radio2" class="mini-txt">Finalizado o Cancelado</label>
-                        <button class="btn mini-in" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <div class="card">
-                    <div class="tools">
-                        <div class="circle">
-                            <span class="red box"></span>
-                        </div>
-                        <div class="circle">
-                            <span class="yellow box"></span>
-                        </div>
-                        <div class="circle">
-                            <span class="green box"></span>
+                    <div class="card__content card__tres__filtro">
+                        <div>
+                        <input checked type="radio" name="radOverclock" id="radio1" class="card__input__mitad" />
                         </div>
                         <div>
-                            <span class="mini-txt"><b>Filtrar solicitudes por fecha</b></span>
+                        <label for="radio1" class="card__input__mitad">Espera o Atención</label>
                         </div>
-                    </div>
-                    <div class="card__content">
-                        
-                        <label for="fechainicio" class="txt mini-txt">Fecha inicio</label>
-                        <input type="date" class="in mini-in" name="fechainicio" id="fechainicio"/>
-                        
-                        <label for="fechafin" class="txt mini-txt">Fecha fin</label>
-                        <input type="date" class="in mini-in" name="fechafin"  id="fechafin"/>
-                        
-                        <button class="btn mini-in" id="filter-button"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                        <div>
+                        <input type="radio" name="radOverclock" id="radio2" class=" card__input__mitad"/>
+                        </div>
+                        <div>
+                        <label for="radio2" class="card__input__mitad">Finalizado</label>
+                        </div>
+                        <div>
+                        <button class="btn card__input__mitad" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                        </div>
                     </div>
                 </div>
 
-                <p><br></p>
+                <div class="card__withitems">
+                    <div class="tools">
+                        <div class="circle">
+                            <span class="red box"></span>
+                        </div>
+                        <div class="circle">
+                            <span class="yellow box"></span>
+                        </div>
+                        <div class="circle">
+                            <span class="green box"></span>
+                        </div>
+                        <div>
+                            <span class="card__item_tittle"><b>Filtrar solicitudes por fecha</b></span>
+                        </div>
+                    </div>
+                    <div class="card__fragment__tres">
+                        <div class="card__fragment__fecha">
+                        <label for="fechainicio" class="card__input__mitad">Fecha inicio</label>
+                        <input type="date" class="card__input__mitad" name="fechainicio" id="fechainicio"/>
+                        </div>
+                        <div class="card__fragment__fecha">    
+                        <label for="fechafin" class="card__input__mitad">Fecha fin</label>
+                        <input type="date" class="card__input__mitad" name="fechafin"  id="fechafin"/>
+                        </div>
+                    <div class="card__fragment__fecha">    
+                        <button class="btn card__input__mitad" id="filter-button"><i class="fa-solid fa-filter"></i> Filtrar</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
                 <button type="submit" class="btn" id="add-button"><i class="fa-solid fa-plus"></i> Agregar reporte</button>
                 <p><br></p>   
                     <div id="loadtabla" class="loading">

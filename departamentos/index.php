@@ -144,12 +144,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button class="btn-modal close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                                <h2 class="modal-title"><b>Departamento</b></h2>
+                                <h2 class="modal__item__titulo">Departamento</h2>
                             </div>
-                            <div class="modal-body fragment-modal" id="modal-body">
+                            <div class="modal-body modal__dos" id="modal-body">
                                 
                             </div>
-                            <div class="modal-footer fragment-modal" id="modal-footer">
+                            <div class="modal-footer fragment__modal__item" id="modal-footer">
                                 
                             </div>
                         </div>

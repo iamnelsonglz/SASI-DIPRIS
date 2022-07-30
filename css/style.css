@@ -226,12 +226,7 @@ select {
 
 /* Historial usuario */
 
-.card {
-    width: 100%;
-    background-color: var(--background-color);
-    border: 1px solid #bdc3c7;
-    box-shadow: 2px 2px 12px rgba(0, 0, 0,0.2), -1px -1px 8px rgba(0, 0, 0,0.2);
-}
+
 
 .card-info {
     margin-left: 25%;
@@ -447,36 +442,6 @@ select {
     }
 }
 
-/* Administrador */
-
-.card__cuatro{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    width: 100%;
-}
-
-.card__tres{
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    width: 75%;
-}
-
-.card__dos{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.card__item{
-    padding: 0em 0.5em;
-}
-
-.card__input__mitad{
-    width: 40%;
-    padding: 5% 0%;
-}
-
-
-
 /* Pantalla responsiva */
 @media only screen and (max-width: 768px){
     .fragment{
@@ -495,4 +460,23 @@ select {
     .btn__cabecera{
         font-size: 0.8em;
     }
+}
+
+
+@media only screen and (max-width: 1080px){
+    .un, .txt {
+        font-size: 0.9em;
+    }
+}
+
+@media only screen and (max-width: 960px){
+    
+}
+
+@media only screen and (max-width: 720px){
+    
+}
+
+@media only screen and (max-width: 640px){
+    
 }

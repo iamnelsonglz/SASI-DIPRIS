@@ -101,48 +101,126 @@
   font-size: var(--font-size);
 }
 
-.fragment-modal{
+.btn-modal:hover,
+.btn-modal:focus{
+    background: var(--principal-color-dark);
+    color: var(--principal-color-light);
+    transition: background-color 0.3s ease-out;
+    outline: 0;
+}
+
+.fragment__modal__item{
   display: grid;
   grid-template-columns: 2fr 2fr;
 }
 
-.fragment-modal > *{
-  padding: 0.5em 2em !important;
+.item__modal{
+  font-size: 1em;
+  width: 100%;
+  height: auto;
+}
+
+.modal__dos{
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  width: 100%;
+}
+
+.modal__item__dos{
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.modal__item__in{
+  width: 80%;
+  margin-left: 10%;
+}
+
+.modal__item__titulo{
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.modal__item__txt{
+  font-size: 1em;
 }
 
 @media only screen and (max-width: 1080px){
-  
+  .modal__item__txt{
+    font-size: 0.9em;
+  }
+  .modal__item__titulo{
+    font-size: 1.5em;
+  }
+
+  .item__modal{
+    width: 90%;
+    margin-left: 8%;
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (max-width: 960px){
+  .modal__item__txt{
+    font-size: 0.9em;
+  }
+  .modal__item__titulo{
+    font-size: 1.5em;
+  }
+
+  .item__modal{
+    width: 90%;
+    margin-left: 8%;
+    font-size: 0.9em;
+  }
 
   .modal-content {
-    width: 80%;
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 800px){
+  .modal__item__txt{
+    font-size: 0.9em;
+  }
+  .modal__item__titulo{
+    font-size: 1.3em;
+  }
+
+  .item__modal{
+    width: 90%;
+    margin-left: 8%;
+    font-size: 0.9em;
+  }
+
+  .modal-content {
+    width: 70%;
   }
 }
 
 @media only screen and (max-width: 640px){
-  .fragment-modal{ 
-      display: grid !important;
-      grid-template-columns: 1fr !important;
+  .modal__item__txt{
+    font-size: 0.8em;
   }
-  
-  .fragment-modal > *{
-      padding: 0.5em;
+  .modal__item__titulo{
+    font-size: 1em;
   }
 
-  .modal-body,select {
-      font-size: 0.8rem;
-  }
-
-  .btn-modal{
-    font-size: 0.8rem;
-  }
-
-  .modal {
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+  .item__modal{
+    width: 90%;
+    margin-left: 8%;
+    font-size: 0.8em;
   }
 
   .modal-content {
     width: 80%;
+  }
+
+  .modal__dos{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
   }
 }
 

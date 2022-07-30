@@ -22,7 +22,7 @@ $(document).ready(function () {
                 personas.forEach(persona => {
                     console.log("-->" + persona);
                     template += `
-                    <li> <i class="fa-solid fa-clipboard-user"></i> ${persona.total} | ${persona.nombre}</li>
+                    <li> <i class="fa-solid fa-clipboard-user"></i>${persona.total} | ${persona.nombre}</li>
                     `;
                     $('.scoreboard-fin').html(template);
 
@@ -41,7 +41,7 @@ $(document).ready(function () {
                 let template = '';
                 personas.forEach(persona => {
                     template += `
-                    <label class="txt"> <i class="fa-solid fa-clock"></i> Total: ${persona.total}</label>
+                    <li> <i class="fa-solid fa-clock"></i> Total: ${persona.total}</li>
                     `;
                     $('.scoreboard-esp').html(template);
                 })

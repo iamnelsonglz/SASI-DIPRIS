@@ -18,13 +18,14 @@ svg {
 .card {
     display:inline-block;
     overflow-y: scroll;
-    width: auto;
-    height: 5em !important;
+    width: auto !important;
+    max-height: 5em;
     padding: 0.5em !important;
     background-color: #F8FBFE;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0,0.2), -2px -2px 2px rgba(0, 0, 0,0.2);
     border-radius: 8px;
     z-index: 1;
-    margin-right: 2em;
+    margin: 0em 0.5em 1em 0.5em;
    }
    
    .tools {
@@ -100,16 +101,296 @@ svg {
     }
    }
 
-   /* Pantalla responsiva mobile */
-@media only screen and (max-width: 720px){
-    .card {
-        width: 100%;
-        height: 5em !important;
-        padding: 0.5em !important;
+/* Tarjetas */
 
-    }
-       
+.card__listasoporte{
+    height: auto !important;
+    display: grid;
 }
 
+.card__withitems{
+    display:inline-block;
+    overflow-y: scroll;
+    width: auto !important;
+    max-height: 5em;
+    padding: 0.5em !important;
+    background-color: #F8FBFE;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0,0.2), -2px -2px 2px rgba(0, 0, 0,0.2);
+    border-radius: 8px;
+    z-index: 1;
+    margin: 0em 0.5em 1em 0.5em;
+}
 
+.card__cuatro{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    width: 100%;
+}
+
+.card__tres{
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    width: 100%;
+}
+
+.card__tres__full{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    width: 100%;
+}
+
+.card__tres__filtro{
+    display: grid;
+    grid-template-columns: 1fr 15fr 1fr 10fr 10fr;
+    width: 100%;
+}
+
+.card__dos__left{
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    width: 100%;
+}
+
+.card__dos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.card__item_tittle{
+    padding: 0em 0.5em;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.card__item{
+    padding: 0.5em 0.5em;
+    font-size: 0.8em;
+}
+
+.card__input__mitad{
+    height: auto;
+    font-size: 0.8em;
+    width: 90% !important;
+    padding: auto !important;
+    
+}
+
+.card__fragment__mitad{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0% 1em;
+}
+
+.card__fragment__fecha{
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    height: auto;
+    margin: 0% 0em !important;
+}
+
+.card__fragment__tres{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+}
+
+/* Pantalla responsiva */
+
+@media only screen and (max-width: 1080px){
+    .card, .card__withitems{
+        max-height: 4.5em;
+    }
+
+    .card__item{
+        font-size: 0.75em;
+        padding: 0.2em 0.5em;
+    }
+
+    .card__item_tittle{
+        padding: 0em 0.5em;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .card__input__mitad{
+        font-size: 0.75em;
+    }
+
+    .card__item{
+        font-size: 0.75em;
+        padding: 0.2em 0.5em;
+    }
+
+    .card__item_tittle{
+        padding: 0em 0.5em;
+        font-size: 0.75em;
+        font-weight: bold;
+    }
+
+    .card__input__mitad{
+        font-size: 0.75em;
+    }
+}
+
+@media only screen and (max-width: 960px){
+    .card, .card__withitems{
+        max-height: 4.2em;
+    }
+
+    .card__item{
+        font-size: 0.72em;
+        padding: 0.2em 0.5em;
+    }
+
+    .card__item_tittle{
+        padding: 0em 0.5em;
+        font-size: 0.72em;
+        font-weight: bold;
+    }
+
+    .card__input__mitad{
+        font-size: 0.72em;
+    }
+
+    .card__tres__filtro{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+}
+
+@media only screen and (max-width: 800px){
+    .card{
+        max-height: 3.5em;
+    }
+
+    .card__withitems{
+        max-height: 5.5em;
+    }
+
+    .card__item{
+        font-size: 0.72em;
+        padding: 0.1em 0.5em;
+    }
+
+    .card__item_tittle{
+        padding: 0em 0.5em;
+        font-size: 0.72em;
+        font-weight: bold;
+    }
+
+    .card__input__mitad{
+        font-size: 0.72em;
+    }
+
+    .card__cuatro{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .card__fragment__fecha{
+        display: grid;
+        grid-template-columns: 1fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+
+    .card__tres__full{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+
+    .card__tres__filtro{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+
+    .box{
+        width: 0.4em;
+        height: 0.4em;
+    }
+}
+
+@media only screen and (max-width: 640px){
+    .card{
+        max-height: 3em;
+        padding: 0em;
+        margin: 0em 0em 0.3em 0em;
+    }
+
+    .box{
+        width: 0.3em;
+        height: 0.3em;
+    }
+
+    .tools {
+        display: flex;
+        align-items: left;
+        padding: 0em;
+       }
+       
+    .circle {
+        padding: 0 2px;
+    }
+
+    .card__withitems{
+        max-height: 4.2em;
+        padding: 0em;
+        margin: 0em 0em 0.3em 0em;
+    }
+
+    .card__item{
+        font-size: 0.8em;
+        padding: 0.1em 0.5em;
+    }
+
+    .card__item_tittle{
+        padding: 0em 0.5em;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+
+    .card__input__mitad{
+        font-size: 0.65em;
+    }
+
+    .card__cuatro{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+
+    .card__tres{
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .card__tres__filtro{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+    
+    .card__fragment__fecha{
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+
+    .card__fragment__mitad{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        margin: 0% 0em !important;
+    }
+}
    
