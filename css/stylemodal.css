@@ -99,6 +99,7 @@
   width: auto;
   height: auto;
   font-size: var(--font-size);
+  font-weight: bold;
 }
 
 .btn-modal:hover,
@@ -118,6 +119,7 @@
   font-size: 1em;
   width: 100%;
   height: auto;
+  padding: 0.2em 0em;
 }
 
 .modal__dos{
@@ -130,6 +132,13 @@
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
+}
+
+.modal__item__pass{
+  display: grid;
+  grid-template-columns: 6fr 2fr;
+  width: 80%;
+  margin-left: 5%;
 }
 
 .modal__item__in{
@@ -222,6 +231,30 @@
     grid-template-columns: 1fr;
     width: 100%;
   }
+
+  @media only screen and (max-width: 480px){
+    .modal__item__txt{
+      font-size: 0.8em;
+    }
+    .modal__item__titulo{
+      font-size: 1em;
+    }
+  
+    .item__modal{
+      width: 90%;
+      margin-left: 8%;
+      font-size: 0.8em;
+    }
+  
+    .modal-content {
+      width: 90%;
+    }
+  
+    .modal__dos{
+      display: grid;
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
 }
 
      

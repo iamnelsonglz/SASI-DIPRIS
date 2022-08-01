@@ -97,10 +97,10 @@ CONCAT(ELT (MONTH(fecha_reporte), 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 
 AS mes_reporte,YEAR(fecha_reporte) AS reporteyear, IF(fecha_respuesta IS NULL,'Aún no respondido',fecha_respuesta) AS fecha_respuesta,
 Usuarioa.nombre AS nombre, Usuarioa.apellidoPaterno AS paterno, Usuarioa.apellidoMaterno AS materno, folio, descripcion, tipo_reporte.nombre AS tipo, 
 IF(Usuariob.username = 'root','Usuario no asignado aún',Usuariob.nombre) AS nombresoporte, IF(Usuariob.username = 'root','', Usuariob.apellidoPaterno) AS paternosoporte, IF(Usuariob.username = 'root','', Usuariob.apellidoMaterno) AS maternosoporte,
-IF(estado=1,'Esta solicitud aún se encuentra en espera de atención','') AS respuestae, 
-IF(estado=2,'Esta solicitud se encuentra en atención pero aún no ha sido respondida','') AS respuestaa,
-IF(estado=3,respuesta,'') AS respuestaf,
-IF(estado=4,'Esta solicitud fué cancelado por el solicitante','') AS respuestac FROM reporte
+IF(estado=1,'Esta solicitud aún se encuentra en espera de atención',
+IF(estado=2,'Esta solicitud se encuentra en atención pero aún no ha sido respondida',
+IF(estado=3,respuesta,
+IF(estado=4,'Esta solicitud fué cancelada por el solicitante','')))) AS respuesta FROM reporte
 INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
 INNER JOIN usuario AS usuarioa ON Reporte.usuario_reporta = Usuarioa.username
 INNER JOIN usuario AS usuariob ON Reporte.usuario_responde = Usuariob.username
@@ -120,10 +120,7 @@ if (!$result) {
         $folio = $row['folio'];
         $descripcion = $row['descripcion'];
         $tipo = $row['tipo'];
-        $respuestae = $row['respuestae'];
-        $respuestaa = $row['respuestaa'];
-        $respuestaf = $row['respuestaf'];
-        $respuestac = $row['respuestac'];
+        $respuesta = $row['respuesta'];
         $nombresoporte = $row['nombresoporte'];
         $paternosoporte = $row['paternosoporte'];
         $maternosoporte = $row['maternosoporte'];
@@ -150,7 +147,7 @@ if (!$result) {
         $pdf->Cell(180, 7, utf8_decode("El personal de soporte respondio lo siguiente:"), 0, 1, "L");
         $pdf->Cell(5);
         $pdf->SetFont('Arial','I',12);
-        $pdf->MultiCell(180,7,utf8_decode("$respuestae$respuestaa$respuestaf$respuestac."),0,'J',0);
+        $pdf->MultiCell(180,7,utf8_decode("$respuesta."),0,'J',0);
         $pdf->SetFont('Arial','',12);
         $pdf->Cell(5);
         $pdf->Cell(20, 7, utf8_decode("Atendio:"), 0, 0, "L");

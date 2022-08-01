@@ -77,7 +77,7 @@ $(document).ready(function () {
             type: 'GET',
             success: function (response) {
                 const personas = JSON.parse(response);
-                let template = '<option value="0">Seleccione la categoria de usuario</option>';
+                let template = '<option value="0">Seleccione la categoria </option>';
                 personas.forEach(persona => {
                     template += `
                         <option value="${persona.id}">${persona.nombre}</option>
@@ -97,37 +97,43 @@ $(document).ready(function () {
         e.preventDefault();
         let template = '';
         template += `
-                    <div>
-                        <label for="username">Nombre de usuario</label>
-                        <input type="text" name="username" id="username">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="username">Nombre de usuario</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="username" id="username">
                     </div>
-                    <div class="pass">
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" id="password">
-                        <span id="show">Mostrar</span>
+                    <div class="pass modal__item__dos">
+                        <div><label class="modal__item__in modal__item__txt" for="password">Contraseña</label></div>
+                        <div class="modal__item__pass">
+                        <div>
+                        <input class="modal__item__in modal__item__txt" type="password" name="password" id="password">
+                        </div>
+                        <div>
+                        <span class="modal__item__in modal__item__txt" id="show">Mostrar</span>
+                        </div>
+                        </div>
                     </div>
-                    <div>
-                        <label for="nombre">Nombre(s)</label>
-                        <input type="text" name="nombre" id="nombre">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="nombre">Nombre(s)</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="nombre" id="nombre">
                     </div>
-                    <div>
-                        <label for="paterno">Apellido paterno</label>
-                        <input type="text" name="paterno" id="paterno">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="paterno">Apellido paterno</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="paterno" id="paterno">
                     </div>
-                    <div>
-                        <label for="materno">Apellido materno</label>
-                        <input type="text" name="materno" id="materno">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="materno">Apellido materno</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="materno" id="materno">
                     </div>
                     <div></div>
-                    <div>
-                        <label for="departamento">Departamento</label>
-                        <select name="departamento" id="departamento">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="departamento">Departamento</label>
+                        <select class="modal__item__in modal__item__txt" name="departamento" id="departamento">
                             
                         </select>
                     </div>
                     <div>
-                        <label for="tipo">Categoria de usuario</label>
-                        <select name="tipo" id="tipo">
+                        <label class="modal__item__in modal__item__txt" for="tipo">Categoria de usuario</label>
+                        <select class="modal__item__in modal__item__txt" name="tipo" id="tipo">
 
                         </select>
                     </div>
@@ -141,7 +147,7 @@ $(document).ready(function () {
                 template += `
                 <div></div>
                 <div>
-                    <button type="submit" class="btn btn-add btn-modal"> <i class="fa-regular fa-floppy-disk"></i> Guardar usuario </button>
+                    <button type="submit" class="btn-modal item__modal btn-add"> <i class="fa-regular fa-floppy-disk"></i> Guardar </button>
                 </div>
                 `;
                 $('#modal-footer').html(template);
@@ -204,37 +210,45 @@ $(document).ready(function () {
                 $('#form-modal').show();
                 personal.forEach(persona => {
                     template += `
-                    <div>
-                        <label for="username">Nombre de usuario</label>
-                        <input type="text" name="username" readonly value="${persona.username}" id="username">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="username">Nombre de usuario</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="username" readonly value="${persona.username}" id="username">
                     </div>
-                    <div class="pass">
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" value="${persona.password}" id="password">
-                        <span id="show">Mostrar</span>
+                    <div class="pass modal__item__dos">
+                        <div>
+                        <label class="modal__item__in modal__item__txt" for="password">Contraseña</label>
+                        </div>
+                        <div class="modal__item__pass">
+                        <div>
+                        <input class="modal__item__in modal__item__txt" type="password" name="password" value="${persona.password}" id="password">
+                        </div>
+                        <div>
+                        <span class="modal__item__in modal__item__txt" id="show">Mostrar</span>
+                        </div>
+                        </div>
                     </div>
-                    <div>
-                        <label for="nombre">Nombre(s)</label>
-                        <input type="text" name="nombre" value="${persona.nombre}" id="nombre">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="nombre">Nombre(s)</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="nombre" value="${persona.nombre}" id="nombre">
                     </div>
-                    <div>
-                        <label for="paterno">Apellido paterno</label>
-                        <input type="text" name="paterno" value="${persona.paterno}" id="paterno">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="paterno">Apellido paterno</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="paterno" value="${persona.paterno}" id="paterno">
                     </div>
-                    <div>
-                        <label for="materno">Apellido materno</label>
-                        <input type="text" name="materno" value="${persona.materno}" id="materno">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="materno">Apellido materno</label>
+                        <input class="modal__item__in modal__item__txt" type="text" name="materno" value="${persona.materno}" id="materno">
                     </div>
                     <div></div>
-                    <div>
-                        <label for="departamento">Departamento</label>
-                        <select name="departamento" id="departamento">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="departamento">Departamento</label>
+                        <select class="modal__item__in modal__item__txt" name="departamento" id="departamento">
                             <option value="${persona.iddepartamento}" selected>${persona.departamento}</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="tipo">Categoria de usuario</label>
-                        <select name="tipo" id="tipo">
+                    <div class="modal__item__dos">
+                        <label class="modal__item__in modal__item__txt" for="tipo">Categoria de usuario</label>
+                        <select class="modal__item__in modal__item__txt" name="tipo" id="tipo">
                             <option value="${persona.idtipo}" selected>${persona.tipo}</option>
                         </select>
                     </div>
@@ -249,10 +263,10 @@ $(document).ready(function () {
                     template = '';
                     template += `
                     <div>
-                    <button type="submit" user="${persona.username}" class="btn btn-del btn-modal"> <i class="fa-solid fa-trash-can"></i> Eliminar usuario </button>
+                    <button type="submit" user="${persona.username}" class="btn-modal item__modal" id="btn-del"> <i class="fa-solid fa-trash-can"></i> Eliminar </button>
                     </div>
                     <div>
-                    <button type="submit" user="${persona.username}" class="btn btn-mod btn-modal"> <i class="fa-regular fa-floppy-disk"></i> Guardar modificación</button>
+                    <button type="submit" user="${persona.username}" class="btn-modal item__modal" id="btn-mod"> <i class="fa-regular fa-floppy-disk"></i> Guardar </button>
                     </div>
                     `;
                     
@@ -281,7 +295,7 @@ $(document).ready(function () {
     })
 
     // Enviar modificación al registro
-    $(document).on('click', '.btn-mod', function (e) {
+    $(document).on('click', '#btn-mod', function (e) {
         e.preventDefault();
         let element = $(this)[0];
         let username_mod = $(element).attr('user');
@@ -320,7 +334,7 @@ $(document).ready(function () {
     })
 
     // Eliminar al registro
-    $(document).on('click', '.btn-del', function (e) {
+    $(document).on('click', '#btn-del', function (e) {
         e.preventDefault();
         let element = $(this)[0];
         let id_del = $(element).attr('user');

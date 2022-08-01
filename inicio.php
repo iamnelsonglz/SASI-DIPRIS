@@ -334,16 +334,17 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                     </table>
 
                     <!-- Previsualizar solicitud -->
+                </div>
                     <div class="modal" id="modalPrevisual">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button class="btn-modal close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                                <h2 class="modal-title"><b>Solicitud</b></h2>
+                                <h2 class="modal__item__titulo"><b>Solicitud</b></h2>
                             </div>
-                            <div class="modal-body fragment-modal" id="modalbody__espera">
+                            <div class="modal-body modal__dos" id="modalbody__espera">
                                 
                             </div>
-                            <div class="modal-footer fragment-modal" id="modalfooter__espera">
+                            <div class="modal-footer fragment__modal__item" id="modalfooter__espera">
                                 
                             </div>
                         </div>
@@ -523,12 +524,12 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button class="btn-modal close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                                <h2 class="modal-title"><b>Solicitud</b></h2>
+                                <h2 class="modal__item__titulo"><b>Solicitud</b></h2>
                             </div>
-                            <div class="modal-body fragment-modal" id="modalbody__espera">
+                            <div class="modal-body modal__dos" id="modalbody__espera">
                                 
                             </div>
-                            <div class="modal-footer fragment-modal" id="modalfooter__espera">
+                            <div class="modal-footer fragment__modal__item" id="modalfooter__espera">
                                 
                             </div>
                         </div>

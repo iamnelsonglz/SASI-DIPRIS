@@ -371,13 +371,13 @@ function verReportesAtencion()
 function verReportesFinalizado()
 {
     global $mysqli;
-    $select_query = "SELECT folio, fecha_reporte AS fecha, tipo_reporte.nombre AS tipo, Usuarioa.nombre AS usuario, Usuariob.nombre AS responde FROM reporte
+    $select_query = "SELECT folio, fecha_respuesta AS fecha, tipo_reporte.nombre AS tipo, Usuarioa.nombre AS usuario, Usuariob.nombre AS responde FROM reporte
     INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
     INNER JOIN usuario AS Usuarioa ON Reporte.usuario_reporta = Usuarioa.username
     INNER JOIN usuario AS Usuariob ON Reporte.usuario_responde = Usuariob.username
     INNER JOIN Categoria ON Usuarioa.categoria = Categoria.idCategoria
     WHERE estado = '3'  AND fecha_respuesta >= CURDATE()
-    ORDER BY Usuarioa.categoria ASC, Tipo_reporte.prioridad ASC, fecha_reporte DESC";
+    ORDER BY Usuarioa.categoria ASC, Tipo_reporte.prioridad ASC, fecha_respuesta DESC";
     $result = $mysqli->query($select_query);
     if (!$result) {
         echo "";
@@ -401,12 +401,12 @@ function verReportesFinalizado()
 function verReportesCancelado()
 {
     global $mysqli;
-    $select_query = "SELECT folio, fecha_reporte AS fecha, tipo_reporte.nombre AS tipo, usuario_reporta AS usuario FROM reporte
+    $select_query = "SELECT folio, fecha_respuesta AS fecha, tipo_reporte.nombre AS tipo, usuario_reporta AS usuario FROM reporte
     INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
     INNER JOIN usuario ON Reporte.usuario_reporta = Usuario.username
     INNER JOIN Categoria ON Usuario.categoria = Categoria.idCategoria
-    WHERE estado = '4' AND fecha_reporte >= CURDATE()
-    ORDER BY Usuario.categoria ASC, Tipo_reporte.prioridad ASC, fecha_reporte DESC";
+    WHERE estado = '4' AND fecha_respuesta >= CURDATE()
+    ORDER BY Usuario.categoria ASC, Tipo_reporte.prioridad ASC, fecha_respuesta DESC";
     $result = $mysqli->query($select_query);
     if (!$result) {
         echo "";
@@ -488,13 +488,13 @@ function filtrarReportesAtencion($fechainicio, $fechafin)
 function filtrarReportesFinalizado($fechainicio, $fechafin)
 {
     global $mysqli;
-    $select_query = "SELECT folio, fecha_reporte AS fecha, tipo_reporte.nombre AS tipo, Usuarioa.nombre AS usuario, Usuariob.nombre AS responde FROM reporte
+    $select_query = "SELECT folio, fecha_respuesta AS fecha, tipo_reporte.nombre AS tipo, Usuarioa.nombre AS usuario, Usuariob.nombre AS responde FROM reporte
     INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
     INNER JOIN usuario AS Usuarioa ON Reporte.usuario_reporta = Usuarioa.username
     INNER JOIN usuario AS Usuariob ON Reporte.usuario_responde = Usuariob.username
     INNER JOIN Categoria ON Usuarioa.categoria = Categoria.idCategoria
     WHERE estado = '3' AND (fecha_respuesta BETWEEN '$fechainicio' AND '$fechafin 23:59:59')
-    ORDER BY Usuarioa.categoria ASC, Tipo_reporte.prioridad ASC, fecha_reporte DESC";
+    ORDER BY Usuarioa.categoria ASC, Tipo_reporte.prioridad ASC, fecha_respuesta DESC";
     $result = $mysqli->query($select_query);
     if (!$result) {
         echo "";

@@ -156,21 +156,21 @@ $(document).ready(function () {
                 personas.forEach(persona => {
                     template = '';
                     template += `
-                            <div>
-                                <label class="txt" for="reporta"><b>Persona que reporta:</b> </label>
-                                <label class="txt" name="reporta" id="p_reporta">${persona.nombre} ${persona.paterno} ${persona.materno}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="reporta"><b>Persona que reporta:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="reporta" id="p_reporta">${persona.nombre} ${persona.paterno} ${persona.materno}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="tipop"><b>Tipo de usuario: </b></label>
-                                <label class="txt" name="tipop" id="tipo_reporta">${persona.categoria}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="tipop"><b>Tipo de usuario: </b></label>
+                                <label class="modal__item__in modal__item__txt" name="tipop" id="tipo_reporta">${persona.categoria}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="reporta"><b>Departamento:</b> </label>
-                                <label class="txt" name="reporta" id="p_reporta">${persona.departamento}, ubicado en la planta ${persona.planta}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="reporta"><b>Departamento:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="reporta" id="p_reporta">${persona.departamento}, ubicado en la planta ${persona.planta}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="msj"><b>Mensaje:</b> </label>
-                                <label class="txt" name="msj" id="msj_solicitud">${persona.descripcion}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="msj"><b>Mensaje:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="msj" id="msj_solicitud">${persona.descripcion}</label>
                             </div>
                             `;
                     $('#modalbody__espera').html(template);
@@ -181,11 +181,11 @@ $(document).ready(function () {
                     template = '';
                     template += `
                             <div>
-                                <select name="user-soporte" id="${persona.folio}" class="support-user in">
+                                <select class="support-user modal__item__in modal__item__txt" name="user-soporte" id="${persona.folio}">
                                 </select>
                             </div>
                             <div>
-                                <button type="submit" folio="${persona.folio}" class="btn assign-button" title="Presione para asignar tarea "> <i class="fa-solid fa-check"></i> Asignar </button>
+                                <button class="assign-button btn-modal item__modal" type="submit" folio="${persona.folio}" title="Presione para asignar tarea "> <i class="fa-solid fa-check"></i> Asignar </button>
                             </div>
                             `;
                     $('#modalfooter__espera').html(template);
@@ -212,21 +212,21 @@ $(document).ready(function () {
                 personas.forEach(persona => {
                     template = '';
                     template += `
-                            <div>
-                                <label class="txt" for="reporta"><b>Persona que reporta:</b> </label>
-                                <label class="txt" name="reporta" id="p_reporta">${persona.nombre} ${persona.paterno} ${persona.materno}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="reporta"><b>Persona que reporta:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="reporta" id="p_reporta">${persona.nombre} ${persona.paterno} ${persona.materno}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="tipop"><b>Tipo de usuario: </b></label>
-                                <label class="txt" name="tipop" id="tipo_reporta">${persona.categoria}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="tipop"><b>Tipo de usuario: </b></label>
+                                <label class="modal__item__in modal__item__txt" name="tipop" id="tipo_reporta">${persona.categoria}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="reporta"><b>Departamento:</b> </label>
-                                <label class="txt" name="reporta" id="p_reporta">${persona.departamento}, ubicado en la planta ${persona.planta}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="reporta"><b>Departamento:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="reporta" id="p_reporta">${persona.departamento}, ubicado en la planta ${persona.planta}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="msj"><b>Mensaje:</b> </label>
-                                <label class="txt" name="msj" id="msj_solicitud">${persona.descripcion}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="msj"><b>Mensaje:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="msj" id="msj_solicitud">${persona.descripcion}</label>
                             </div>
                             `;
                     $('#modalbody__espera').html(template);
@@ -236,14 +236,14 @@ $(document).ready(function () {
                 personas.forEach(persona => {
                     template = '';
                     template += `
-                            <div>
-                            <span class="txt"><b>Usuario asignado: </b></span>
-                            <select name="user-soporte" id="${persona.folio}" class="support-user in">
+                            <div class="modal__item__dos">
+                            <span class="modal__item__in modal__item__txt"><b>Usuario asignado: </b></span>
+                            <select class="support-user modal__item__in modal__item__txt" name="user-soporte" id="${persona.folio}">
                             <option value="${persona.responde}">${persona.responde}</option>
                             </select>
                             </div>
-                            <div>
-                                <button type="submit" folio="${persona.folio}" class="btn assign-button" title="Presione para re asignar solicitud "> <i class="fa-solid fa-check"></i> Re asignar </button>
+                            <div class="modal__item__dos">
+                                <button type="submit" folio="${persona.folio}" class="assign-button btn-modal item__modal" title="Presione para re asignar solicitud "> <i class="fa-solid fa-check"></i> Re asignar </button>
                             </div>
                             `;
                     $('#modalfooter__espera').html(template);
@@ -269,13 +269,13 @@ $(document).ready(function () {
                 personas.forEach(persona => {
                     template = '';
                     template += `
-                            <div>
-                                <label class="txt" for="msj"><b>Mensaje:</b> </label>
-                                <label class="txt" name="msj" id="msj_solicitud">${persona.descripcion}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="msj"><b>Mensaje:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="msj" id="msj_solicitud">${persona.descripcion}</label>
                             </div>
-                            <div>
-                                <label class="txt" for="resp"><b>Respuesta:</b> </label>
-                                <label class="txt" name="resp" id="resp_solicitud">${persona.respuesta}</label>
+                            <div class="modal__item__dos">
+                                <label class="modal__item__in modal__item__txt" for="resp"><b>Respuesta:</b> </label>
+                                <label class="modal__item__in modal__item__txt" name="resp" id="resp_solicitud">${persona.respuesta}</label>
                             </div>
                             `;
                     $('#modalbody__espera').html(template);
@@ -287,7 +287,7 @@ $(document).ready(function () {
                     template += `
                             <div></div>
                             <div>
-                            <button type="submit" folio="${persona.folio}" class="pdf-button btn" title="Presione para generar pdf "> <i class="fa-solid fa-file-pdf"></i> Descargar solicitud</button>
+                            <button type="submit" folio="${persona.folio}" class="btn-modal item__modal pdf-button" title="Presione para generar pdf "> <i class="fa-solid fa-file-pdf"></i> Descargar solicitud</button>
                             </div>
                             `;
                     $('#modalfooter__espera').html(template);
@@ -341,9 +341,9 @@ $(document).ready(function () {
                             <td>${persona.fecha}</td>
                             <td>${persona.tipo}</td>
                             <td>${persona.usuario}</td>
-                            
                             <td>
                             <button type="submit" folio="${persona.folio}" class="btn previsualizar__espera" title="Presione para ver la solicitud "> <i class="fa-solid fa-eye"></i> Ver solicitud</button>
+                            <button type="submit" folio="${persona.folio}" class="pdf-button btn" title="Presione para generar pdf "> <i class="fa-solid fa-file-pdf"></i> Descargar solicitud</button>
                             </td>
                         </tr>
                     `;
@@ -501,8 +501,7 @@ $(document).ready(function () {
                             <td>${persona.fecha}</td>
                             <td>${persona.tipo}</td>
                             <td>${persona.usuario}</td>
-                            <td>No asignado</td>
-                            <td>Sin acción</td>
+                            <td><button type="submit" folio="${persona.folio}" class="pdf-button btn" title="Presione para generar pdf "> <i class="fa-solid fa-file-pdf"></i> Descargar solicitud</button></td>
                         </tr>
                     `
                         $('#table-admin').html(template);
@@ -617,9 +616,9 @@ $(document).ready(function () {
                             <td>${persona.fecha}</td>
                             <td>${persona.tipo}</td>
                             <td>${persona.usuario}</td>
-                            
                             <td>
                             <button type="submit" folio="${persona.folio}" class="btn previsualizar__espera" title="Presione para ver la solicitud "> <i class="fa-solid fa-eye"></i> Ver solicitud</button>
+                            <button type="submit" folio="${persona.folio}" class="pdf-button btn" title="Presione para generar pdf "> <i class="fa-solid fa-file-pdf"></i> Descargar solicitud</button>
                             </td>
                         </tr>
                         
@@ -770,8 +769,7 @@ $(document).ready(function () {
                             <td>${persona.fecha}</td>
                             <td>${persona.tipo}</td>
                             <td>${persona.usuario}</td>
-                            <td>No asignado</td>
-                            <td>Sin acción</td>
+                            <td><button type="submit" folio="${persona.folio}" class="pdf-button btn" title="Presione para generar pdf "> <i class="fa-solid fa-file-pdf"></i> Descargar solicitud</button></td>
                         </tr>
                     `;
                         $('#table-admin').html(template);

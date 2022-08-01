@@ -145,6 +145,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                             <div class="modal-header">
                                 <button class="btn-modal close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                                 <h2 class="modal__item__titulo">Departamento</h2>
+
+                     
                             </div>
                             <div class="modal-body modal__dos" id="modal-body">
                                 

@@ -265,12 +265,12 @@ function verReporteAtencion($username){
 
 function verReporteFinalizado($username){
     global $mysqli;
-    $select_query = "SELECT folio, fecha_reporte AS fecha, tipo_reporte.nombre AS tipo, Usuario.nombre AS usuario FROM reporte
+    $select_query = "SELECT folio, fecha_respuesta AS fecha, tipo_reporte.nombre AS tipo, Usuario.nombre AS usuario FROM reporte
     INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
     INNER JOIN usuario ON Reporte.usuario_reporta = Usuario.username
     INNER JOIN Categoria ON Usuario.categoria = Categoria.idCategoria
     WHERE estado = '3' and usuario_responde = '$username'  AND fecha_respuesta >= CURDATE()
-    ORDER BY Usuario.categoria ASC, Tipo_reporte.prioridad ASC, fecha_reporte DESC";
+    ORDER BY Usuario.categoria ASC, Tipo_reporte.prioridad ASC, fecha_respuesta DESC";
     $result = $mysqli->query($select_query);
     if (!$result) {
         echo "";
@@ -292,12 +292,14 @@ function verReporteFinalizado($username){
 
 function verReporteReponder($folio){
     global $mysqli;
-    $select_query = "SELECT folio, usuario.nombre AS nombre, usuario.apellidoPaterno AS paterno, usuario.apellidoMaterno AS materno, fecha_reporte AS fecha, descripcion, tipo_reporte.nombre AS tipo, Departamento.nombre AS departamento, planta FROM reporte
-    INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
-    INNER JOIN estado ON reporte.estado = estado.idEstado
-    INNER JOIN usuario ON Reporte.usuario_reporta = Usuario.username
-    INNER JOIN Departamento ON Usuario.departamento = Departamento.idDepartamento
-    WHERE folio = $folio and estado='2' Limit 1";
+    $select_query = "SELECT folio, usuario.nombre AS nombre, usuario.apellidoPaterno AS paterno, usuario.apellidoMaterno AS materno, 
+        Categoria.nombre AS categoria, tipo_reporte.nombre AS tipo, descripcion, Departamento.nombre AS departamento, planta FROM reporte
+        INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
+        INNER JOIN estado ON reporte.estado = estado.idEstado
+        INNER JOIN usuario ON Reporte.usuario_reporta = Usuario.username
+        INNER JOIN categoria ON Usuario.categoria = Categoria.idCategoria
+        INNER JOIN Departamento ON Usuario.departamento = Departamento.idDepartamento
+        WHERE folio = $folio and estado='2' Limit 1";
     $result = $mysqli->query($select_query);
     if (!$result) {
         echo "";
@@ -310,7 +312,7 @@ function verReporteReponder($folio){
                 'nombre' => $row['nombre'],
                 'paterno' => $row['paterno'],
                 'materno' => $row['materno'],
-                'fecha' => $row['fecha'],
+                'categoria' => $row['categoria'],
                 'descripcion' => $row['descripcion'],
                 'tipo' => $row['tipo'],
                 'departamento' => $row['departamento'],
@@ -339,10 +341,12 @@ function responderReporte($folio,$respuesta){
 
 function verRepuestaReporte($folio){
     global $mysqli;
-    $select_query = "SELECT folio, usuario.nombre AS nombre, usuario.apellidoPaterno AS paterno, usuario.apellidoMaterno AS materno, fecha_reporte AS fecha, descripcion, tipo_reporte.nombre AS tipo, Departamento.nombre AS departamento, planta, respuesta FROM reporte
+    $select_query = "SELECT folio, usuario.nombre AS nombre, usuario.apellidoPaterno AS paterno, usuario.apellidoMaterno AS materno, 
+    Categoria.nombre AS categoria, tipo_reporte.nombre AS tipo, respuesta,descripcion, Departamento.nombre AS departamento, planta FROM reporte
     INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
     INNER JOIN estado ON reporte.estado = estado.idEstado
     INNER JOIN usuario ON Reporte.usuario_reporta = Usuario.username
+    INNER JOIN categoria ON Usuario.categoria = Categoria.idCategoria
     INNER JOIN Departamento ON Usuario.departamento = Departamento.idDepartamento
     WHERE folio = $folio and estado='3' Limit 1";
     $result = $mysqli->query($select_query);
@@ -357,8 +361,9 @@ function verRepuestaReporte($folio){
                 'nombre' => $row['nombre'],
                 'paterno' => $row['paterno'],
                 'materno' => $row['materno'],
-                'fecha' => $row['fecha'],
+                'categoria' => $row['categoria'],
                 'descripcion' => $row['descripcion'],
+                'respuesta' => $row['respuesta'],
                 'tipo' => $row['tipo'],
                 'departamento' => $row['departamento'],
                 'planta' => $row['planta'],
@@ -399,7 +404,7 @@ function filtrarReportesAtencion($fechainicio,$fechafin,$username){
 
 function filtrarReportesFinalizado($fechainicio,$fechafin,$username){
     global $mysqli;
-    $select_query = "SELECT folio, fecha_reporte AS fecha, tipo_reporte.nombre AS tipo, Usuario.nombre AS usuario FROM reporte
+    $select_query = "SELECT folio, fecha_respuesta AS fecha, tipo_reporte.nombre AS tipo, Usuario.nombre AS usuario FROM reporte
     INNER JOIN Tipo_reporte ON reporte.tipo = tipo_reporte.idTipo
     INNER JOIN usuario ON Reporte.usuario_reporta = Usuario.username
     INNER JOIN Categoria ON Usuario.categoria = Categoria.idCategoria
@@ -483,5 +488,3 @@ function previsualizarSolicitud($folio){
         echo $jsonstring;
     }
 }
-
-?>
