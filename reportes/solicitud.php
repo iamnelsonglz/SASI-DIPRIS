@@ -134,7 +134,7 @@ if (!$result) {
         $pdf->SetTitle($title);
         $pdf->Ln(10);
         $pdf->Cell(5);
-        $pdf->MultiCell(180,7,utf8_decode("Por medio del presente documento, se comunica que el C. $nombre $paterno $materno ha realizado una solicitud de atención a un bien informático el día $semana_reporte $dia_reporte de $mes_reporte de $reporteyear de tipo $tipo y con folio $folio a través del SISA."),0,'J',0);
+        $pdf->MultiCell(180,7,utf8_decode("Por medio del presente documento, se comunica que el C. $nombre $paterno $materno ha realizado una solicitud de atención a un bien informático el día $semana_reporte $dia_reporte de $mes_reporte de $reporteyear de tipo $tipo y con folio $folio a través del SASI."),0,'J',0);
         $pdf->Ln(10);
         $pdf->Cell(5);
         $pdf->Cell(180, 7, utf8_decode("El solicitante indico lo siguiente:"), 0, 1, "L");

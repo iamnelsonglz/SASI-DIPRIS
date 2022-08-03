@@ -15,7 +15,7 @@ $(document).ready(function () {
         }else{
             cad = "Buenas noches";
         } 
-        cad +=', Bienvenido al SASI'
+        cad +=', Bienvenido a SASI'
         $("#saludo").html(cad);
     }
     

@@ -1,34 +1,8 @@
 $(document).ready(function () {
-    finish();
-    wait();
-    attention();
-    verEsperaAtencion();
     fecha();
+    verEsperaAtencion();
 
-    function finish() {
-        $.ajax({
-            url: '../bdd/scriptsoporte.php?finish',
-            type: 'GET',
-            beforeSend: function (xhr) {
-
-            },
-            success: function (response) {
-
-                const personas = JSON.parse(response);
-                let template = '';
-                personas.forEach(persona => {
-                    console.log("-->" + persona);
-                    template += `
-                    <li> <i class="fa-solid fa-circle-check"></i> Total de hoy: ${persona.total}</li>
-                    `;
-                    $('.scoreboard-fin').html(template);
-
-                })
-            }
-        });
-    }
-
-    function wait() {
+    function contadorEspera() {
         $.ajax({
             url: '../bdd/scriptsoporte.php?wait',
             type: 'GET',
@@ -40,29 +14,44 @@ $(document).ready(function () {
                     <li> <i class="fa-solid fa-clock"></i> Total: ${persona.total}</li>
                     `;
                     $('.scoreboard-esp').html(template);
+                    $('.scoreboard-esp').show();
                 })
             }
         });
     }
 
-    function attention() {
+    function contadorFinalizado() {
+        $.ajax({
+            url: '../bdd/scriptsoporte.php?finish',
+            type: 'GET',
+            success: function (response) {
+                const personas = JSON.parse(response);
+                let template = '';
+                personas.forEach(persona => {
+                    template += `
+                    <li> <i class="fa-solid fa-circle-check"></i> Total de hoy: ${persona.total}</li>
+                    `;
+                    $('.scoreboard-fin').html(template);
+                    $('.scoreboard-fin').show();
+                })
+            }
+        });
+    }
+
+    function contadorAtencion() {
         $.ajax({
             url: '../bdd/scriptsoporte.php?attention',
             type: 'GET',
-            beforeSend: function (xhr) {
-
-            },
             success: function (response) {
 
                 const personas = JSON.parse(response);
                 let template = '';
                 personas.forEach(persona => {
-                    console.log("-->" + persona);
                     template += `
                     <li> <i class="fa-solid fa-bell-concierge"></i> Total: ${persona.total}</li>
                     `;
                     $('.scoreboard-aten').html(template);
-
+                    $('.scoreboard-aten').show();
                 })
             }
         });
@@ -80,6 +69,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: '../bdd/scriptsoporte.php?atencion',
+            async: false, 
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -113,18 +103,15 @@ $(document).ready(function () {
                         </tr>
                     `
                         $('#table-support').html(template);
-                    })
+                    });
                 }
             }
-
         });
 
         $.ajax({
             url: '../bdd/scriptsoporte.php?pendientes',
+            async: false, 
             type: 'GET',
-            beforeSend: function (xhr) {
-
-            },
             success: function (response) {
                 $("#loadtabla").fadeOut("slow");
                 if (response === '[]') {
@@ -154,8 +141,13 @@ $(document).ready(function () {
                         </tr>
                     `
                         $('#table-support').html(template);
-                    })
+                    });
                 }
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -165,6 +157,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: '../bdd/scriptsoporte.php?finalizado',
+            async: false, 
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -198,12 +191,16 @@ $(document).ready(function () {
                         $('#table-support').html(template);
                     })
                 }
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
-
         });
     }
 
-    // filtrar reporte
+    /* filtrar reporte
     $(document).on('click', '#where-support', function (e) {
         let filtro = $('#where-support').val();
         if (filtro == 1) {
@@ -211,7 +208,7 @@ $(document).ready(function () {
         } else {
             $.ajax({
                 url: '../bdd/scriptsoporte.php?atencion',
-
+                async: false, 
                 type: 'GET',
                 success: function (response) {
                     if (response === '[]') {
@@ -238,14 +235,15 @@ $(document).ready(function () {
 
             });
         }
-
     })
+    */
 
     // Ver historial
     function filtrarEsperaAtencion(fechainicio, fechafin) {
         let template = '';
         $.ajax({
             url: '../bdd/scriptsoporte.php?atencionfiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false, 
             type: 'GET',
 
             success: function (response) {
@@ -283,6 +281,7 @@ $(document).ready(function () {
 
         $.ajax({
             url: '../bdd/scriptsoporte.php?pendientesfiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false, 
             type: 'GET',
 
             success: function (response) {
@@ -315,6 +314,11 @@ $(document).ready(function () {
                         $('#table-support').html(template);
                     })
                 }
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -323,6 +327,7 @@ $(document).ready(function () {
         let template = '';
         $.ajax({
             url: '../bdd/scriptsoporte.php?finalizadofiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false, 
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -356,8 +361,12 @@ $(document).ready(function () {
                         $('#table-support').html(template);
                     })
                 }
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
-
         });
     }
 
@@ -378,12 +387,10 @@ $(document).ready(function () {
                 $.post('../bdd/scriptsoporte.php', postData, function (response) {
                     alert(response);
                     cerrarModal();
-                    finish();
-                    wait();
-                    attention();
                     verEsperaAtencion();
                 });
             } else {
+                
             }
         }
     })
@@ -393,7 +400,11 @@ $(document).ready(function () {
         // Extraer folio del reporte
         let element = $(this)[0];
         let folio = $(element).attr('folio');
-        window.location.href = "../reportes/solicitud.php?folio=" + folio;
+        // window.location.href = "../reportes/solicitud.php?folio=" + folio;
+        // Abrir nuevo tab
+        var win = window.open("../reportes/solicitud.php?folio=" + folio, '_blank');
+        // Cambiar el foco al nuevo tab (punto opcional)
+        win.focus();
     })
 
 
@@ -415,6 +426,7 @@ $(document).ready(function () {
                 let template = '';
                 $.ajax({
                     url: '../bdd/scriptsoporte.php?responderver=' + folio,
+                    async: false, 
                     type: 'GET',
                     success: function (response) {
                         if (response === '[]') {
@@ -471,6 +483,11 @@ $(document).ready(function () {
                                 $('#modalfooter__espera').show();
                             })
                         }
+                    },
+                    complete: function (data) {
+                        contadorEspera();
+                        contadorFinalizado();
+                        contadorAtencion();
                     }
                 });
             }
@@ -493,8 +510,8 @@ $(document).ready(function () {
             };
             $.post('../bdd/scriptsoporte.php', postData, function (response) {
                 alert(response);
-                verEsperaAtencion();
                 cerrarModal();
+                verEsperaAtencion();
             });
         }
         })

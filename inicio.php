@@ -254,7 +254,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                 </div>
             </div>
                 
-                <form action="/reportes/" method="POST" id="formulario">
+                <form action="/reportes/" target="_blank" method="POST" id="formulario">
             <div class="card__tres">
                 <div class="card__withitems">
                     <div class="tools">
@@ -563,13 +563,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
                         <input checked type="radio" name="radOverclock" id="radio1" class="card__input__mitad" />
                         </div>
                         <div>
-                        <label for="radio1" class="card__input__mitad">Espera o Atención</label>
+                        <label for="radio1" class="card__input__mitad"> Recientes</label>
                         </div>
                         <div>
                         <input type="radio" name="radOverclock" id="radio2" class=" card__input__mitad"/>
                         </div>
                         <div>
-                        <label for="radio2" class="card__input__mitad">Finalizado</label>
+                        <label for="radio2" class="card__input__mitad"> Finalizado</label>
                         </div>
                         <div>
                         <button class="btn card__input__mitad" id="estado-filter"><i class="fa-solid fa-filter"></i> Filtrar</button>
@@ -629,7 +629,23 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
         </main>
         <script src="../js/mlateral.js"></script>
     </body>
+    <!-- Tiempo de inactividad -->
+<script>
+     var time = new Date().getTime();
+     $(document.body).bind("mousemove keypress", function(e) {
+         time = new Date().getTime();
+     });
 
+     function refresh() {
+        // Espera a que pasen 2 minutos
+         if(new Date().getTime() - time >= 120000) 
+             window.location.reload(true);
+         else 
+             setTimeout(refresh, 60000);
+     }
+    // Comprueba cada 1 minuto
+    setTimeout(refresh, 60000);
+</script>
     </html>
 <?php
 } else {

@@ -1,40 +1,17 @@
 $(document).ready(function () {
-    finalizado();
-    espera();
-    atencion();
-    //listaSoporte();
-    estado();
+    contadorEspera();
+    contadorFinalizado();
+    contadorAtencion();
+    listaSoporte();
+    filtroEstado();
     fecha();
     obtenerReportesEspera();
 
-    // Contador solicitudes finalizadas
-    function finalizado() {
-        $.ajax({
-            url: '../bdd/scriptadministrador.php?finish',
-            type: 'GET',
-            beforeSend: function (xhr) {
-
-            },
-            success: function (response) {
-
-                const personas = JSON.parse(response);
-                let template = '';
-                personas.forEach(persona => {
-                    console.log("-->" + persona);
-                    template += `
-                    <li> <i class="fa-solid fa-clipboard-user"></i>${persona.total} | ${persona.nombre}</li>
-                    `;
-                    $('.scoreboard-fin').html(template);
-
-                })
-            }
-        });
-    }
-
     // Contador solicitudes en espera
-    function espera() {
+    function contadorEspera() {
         $.ajax({
             url: '../bdd/scriptadministrador.php?wait',
+            async: false,
             type: 'GET',
             success: function (response) {
                 const personas = JSON.parse(response);
@@ -49,16 +26,35 @@ $(document).ready(function () {
         });
     }
 
-    // Contador solicitudes en atención
-    function atencion() {
+    // Contador solicitudes finalizadas
+    function contadorFinalizado() {
         $.ajax({
-            url: '../bdd/scriptadministrador.php?attention',
+            url: '../bdd/scriptadministrador.php?finish',
+            async: false,
             type: 'GET',
-            beforeSend: function (xhr) {
-
-            },
             success: function (response) {
 
+                const personas = JSON.parse(response);
+                let template = '';
+                personas.forEach(persona => {
+                    console.log("-->" + persona);
+                    template += `
+                    <li> <i class="fa-solid fa-clipboard-user"></i> ${persona.total} | ${persona.nombre}</li>
+                    `;
+                    $('.scoreboard-fin').html(template);
+
+                })
+            }
+        });
+    }
+
+    // Contador solicitudes en atención
+    function contadorAtencion() {
+        $.ajax({
+            url: '../bdd/scriptadministrador.php?attention',
+            async: false,
+            type: 'GET',
+            success: function (response) {
                 const personas = JSON.parse(response);
                 let template = '';
                 personas.forEach(persona => {
@@ -74,13 +70,11 @@ $(document).ready(function () {
     }
 
     // Listado de usuarios de soporte
-    function atencion() {
+    function listaSoporte() {
         $.ajax({
             url: '../bdd/scriptadministrador.php?listadosoporte',
+            async: false,
             type: 'GET',
-            beforeSend: function (xhr) {
-
-            },
             success: function (response) {
 
                 const personas = JSON.parse(response);
@@ -98,9 +92,10 @@ $(document).ready(function () {
     }
 
     // Rellenar filtro de solicitudes por estado
-    function estado() {
+    function filtroEstado() {
         $.ajax({
             url: '../bdd/scriptadministrador.php?where',
+            async: false,
             type: 'GET',
             success: function (response) {
                 const personas = JSON.parse(response);
@@ -122,7 +117,9 @@ $(document).ready(function () {
         document.getElementById("fechafin").value = fecha.toJSON().slice(0, 10);
     }
 
+    // Datos de modal
     var modal = document.getElementById("modalPrevisual");
+
     // Cerrar modal al hacer click en botón
     $(document).on('click', '.close', function (e) {
         modal.style.display = "none";
@@ -149,6 +146,7 @@ $(document).ready(function () {
         let folio = $(element).attr('folio');
         $.ajax({
             url: '../bdd/scriptadministrador.php?previsual=' + folio + '&estado=1',
+            async: false,
             type: 'GET',
             success: function (response) {
                 console.log(response);
@@ -205,6 +203,7 @@ $(document).ready(function () {
         let folio = $(element).attr('folio');
         $.ajax({
             url: '../bdd/scriptadministrador.php?previsual=' + folio + '&estado=2',
+            async: false,
             type: 'GET',
             success: function (response) {
                 console.log(response);
@@ -262,6 +261,7 @@ $(document).ready(function () {
         let folio = $(element).attr('folio');
         $.ajax({
             url: '../bdd/scriptadministrador.php?previsual=' + folio + '&estado=3',
+            async: false,
             type: 'GET',
             success: function (response) {
                 console.log(response);
@@ -293,7 +293,6 @@ $(document).ready(function () {
                     $('#modalfooter__espera').html(template);
                     $('#modalfooter__espera').show();
                 })
-                //selectSoporte();
             }
         });
     })
@@ -302,11 +301,9 @@ $(document).ready(function () {
     function obtenerReportesEspera() {
         let template = '';
         let thead = '';
-
-
-
         $.ajax({
             url: '../bdd/scriptadministrador.php?espera',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -332,10 +329,7 @@ $(document).ready(function () {
                 }
                 else {
                     const personas = JSON.parse(response);
-
                     personas.forEach(persona => {
-
-
                         template += `
                         <tr folio="${persona.folio}" class="selected">
                             <td>${persona.fecha}</td>
@@ -351,6 +345,11 @@ $(document).ready(function () {
                     })
                 }
 
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
 
@@ -359,7 +358,6 @@ $(document).ready(function () {
     // Mostrar las solicitudes en Atención
     function obtenerReportesAtencion() {
         let template = '';
-
         let thead = '';
 
         thead += `
@@ -371,6 +369,7 @@ $(document).ready(function () {
         $('#header').html(thead);
         $.ajax({
             url: '../bdd/scriptadministrador.php?atencion',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -405,6 +404,11 @@ $(document).ready(function () {
                     })
                 }
 
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -412,7 +416,6 @@ $(document).ready(function () {
     // Mostrar las solicitudes Finalizadas
     function obtenerReportesFinalizado() {
         let template = '';
-
         let thead = '';
 
         thead += `
@@ -425,6 +428,7 @@ $(document).ready(function () {
         $('#header').html(thead);
         $.ajax({
             url: '../bdd/scriptadministrador.php?finalizado',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -458,7 +462,11 @@ $(document).ready(function () {
                         $('#table-admin').html(template);
                     })
                 }
-
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -477,6 +485,7 @@ $(document).ready(function () {
         $('#header').html(thead);
         $.ajax({
             url: '../bdd/scriptadministrador.php?cancelado',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -507,7 +516,11 @@ $(document).ready(function () {
                         $('#table-admin').html(template);
                     })
                 }
-
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -517,6 +530,7 @@ $(document).ready(function () {
         let template = '';
         $.ajax({
             url: '../bdd/scriptadministrador.php?soporte',
+            async: false,
             type: 'GET',
             success: function (response) {
                 if (response === '[]') {
@@ -550,6 +564,7 @@ $(document).ready(function () {
         let template = '';
         $.ajax({
             url: '../bdd/scriptadministrador.php?soporte',
+            async: false,
             type: 'GET',
             success: function (response) {
                 if (response === '[]') {
@@ -591,6 +606,7 @@ $(document).ready(function () {
         $('#header').html(thead);
         $.ajax({
             url: '../bdd/scriptadministrador.php?esperafiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -628,6 +644,11 @@ $(document).ready(function () {
                     selectSoporte();
                 }
 
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -647,6 +668,7 @@ $(document).ready(function () {
         $('#header').html(thead);
         $.ajax({
             url: '../bdd/scriptadministrador.php?atencionfiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -682,6 +704,11 @@ $(document).ready(function () {
 
                 }
 
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -701,6 +728,7 @@ $(document).ready(function () {
         $('#header').html(thead);
         $.ajax({
             url: '../bdd/scriptadministrador.php?finalizadofiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -736,6 +764,11 @@ $(document).ready(function () {
 
                 }
 
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -745,6 +778,7 @@ $(document).ready(function () {
         let template = '';
         $.ajax({
             url: '../bdd/scriptadministrador.php?canceladofiltro=true&inicio=' + fechainicio + '&fin=' + fechafin,
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -776,6 +810,11 @@ $(document).ready(function () {
                     })
                 }
 
+            },
+            complete: function (data) {
+                contadorEspera();
+                contadorFinalizado();
+                contadorAtencion();
             }
         });
     }
@@ -791,11 +830,6 @@ $(document).ready(function () {
 
         }
     })
-
-    /* nuevo reporte
-    $(document).on('click', '.add-button', function (e) {
-        window.location.href = "../reportes/nuevo.php";
-    })*/
 
     // Asignar tarea
     $(document).on('click', '.assign-button', function (e) {
@@ -826,9 +860,6 @@ $(document).ready(function () {
             }
         }
         cerrarModal();
-        finish();
-        wait();
-        attention();
     })
 
     // filtrar reporte
@@ -846,9 +877,6 @@ $(document).ready(function () {
         } else {
 
         }
-        finish();
-        wait();
-        attention();
     })
 
     // Generar pdf de reporte
@@ -856,7 +884,11 @@ $(document).ready(function () {
         // Extraer folio del reporte
         let element = $(this)[0];
         let folio = $(element).attr('folio');
-        window.location.href = "../reportes/solicitud.php?folio=" + folio;
+        // window.location.href = "../reportes/solicitud.php?folio=" + folio;
+        // Abrir nuevo tab
+        var win = window.open("../reportes/solicitud.php?folio=" + folio, '_blank');
+        // Cambiar el foco al nuevo tab (punto opcional)
+        win.focus();
     })
 
     // filtrar solicitudes
@@ -890,9 +922,6 @@ $(document).ready(function () {
                 }
             }
         }
-        finish();
-        wait();
-        attention();
     })
 
     // Generar pdf de solicitudes filtradas
@@ -905,12 +934,10 @@ $(document).ready(function () {
         if (fechainicio.length <= 0 || fechafin.length <= 0) {
             e.preventDefault();
             alert("Es necesario seleccionar fecha de inicio y fecha de fin");
-
         } else {
             if (Date.parse(fechafin) < Date.parse(fechainicio)) {
                 e.preventDefault();
                 alert("La fecha final debe ser mayor o igual a la fecha de inicio");
-
             } else {
 
             }

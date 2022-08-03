@@ -1,6 +1,6 @@
 $(document).ready(function () {
     fecha();
-    verEsperaAtencion();
+    verRecientes();
 
     // Mostrar fecha actual en filtro de fecha
     function fecha(){
@@ -10,10 +10,12 @@ $(document).ready(function () {
     }
 
     // Mostrar solicitudes con el estado Espera
-    function verEsperaAtencion(){
+    function verRecientes(){
         let template = '';
+
         $.ajax({
-            url: '../bdd/scriptusuario.php?historial=true&estado=1',
+            url: '../bdd/scriptusuario.php?historial=true&estado=2',
+            async: false, 
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -21,9 +23,68 @@ $(document).ready(function () {
             success: function (response) {
                 
                 if (response === '[]') {
+                    
                     template += `
                     <div class="cabecera">
-                    <h2 class="txt txt__cabecera">No hay solicitudes en espera en este momento</h2>
+                    <h2 class="txt txt__cabecera">No hay solicitudes en atención</h2>
+                    </div>
+                   
+                    `;
+                    $('#card').html(template);
+                }else{
+                    const personas = JSON.parse(response);
+                    
+                    personas.forEach(persona => {
+                        template += `
+                        <div class="cabecera fragment">
+                            <h2 class="txt txt__cabecera">Folio de solicitud: ${persona.folio}</h2>
+                            <h2 class="txt txt__cabecera ${persona.estado}">Estado: ${persona.estado}</h2>
+                            
+                        </div>
+                        <div class="cuerpo">
+                            <table>
+                                <!-- Encabezado de tabla -->
+                                <thead class="headt">
+                                    <tr id="header">
+                                        <th>MENSAJE ENVIADO</th>
+                                        <th>RESPUESTA</th>
+                                    </tr>
+                                </thead>
+                                <!-- Contenido de la tabla  -->
+                                <tbody class="bodyt">
+                                    <tr>
+                                        <td>${persona.descripcion}</td>
+                                        <td>${persona.respuesta}</td>
+                                    <tr/>
+                                    <tr>
+                                        <td><b>Fecha de envio:</b> ${persona.fecha}</td>
+                                        <td><b>Fecha de respuesta:</b> ${persona.fecha_respuesta}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Tipo de solicitud:</b> ${persona.tipo}</td>
+                                        <td><b>Persona que responde:</b> ${persona.usuario}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--button id="btn-imprimir" class="btn estado_reporte" folio="${persona.folio}"> <i class="fa-solid fa-download"></i> Generar PDF de reporte</button-->
+                        </div>
+                        `
+                        $('#card').html(template);
+                    })
+                }
+            }
+        }); 
+
+        $.ajax({
+            url: '../bdd/scriptusuario.php?historial=true&estado=1',
+            async: false, 
+            type: 'GET',
+           
+            success: function (response) {
+                if (response === '[]') {
+                    template += `
+                    <div class="cabecera">
+                    <h2 class="txt txt__cabecera">No hay solicitudes en espera</h2>
                     </div>
                     <br>
                     <br>
@@ -31,7 +92,7 @@ $(document).ready(function () {
                     $('#card').html(template);
                 }else{
                     const personas = JSON.parse(response);
-                    template = '';
+                    
                     personas.forEach(persona => {
                         template += `
                         <div class="cabecera three__fragment">
@@ -74,18 +135,16 @@ $(document).ready(function () {
         });
 
         $.ajax({
-            url: '../bdd/scriptusuario.php?historial=true&estado=2',
+            url: '../bdd/scriptusuario.php?historial=true&estado=3',
+            async: false, 
             type: 'GET',
-            beforeSend: function (xhr) {
-                
-            },
             success: function (response) {
                 $("#loadtabla").fadeOut("slow");
                 if (response === '[]') {
                     
                     template += `
                     <div class="cabecera">
-                    <h2 class="txt txt__cabecera">No hay solicitudes en atención en este momento</h2>
+                    <h2 class="txt txt__cabecera">No hay solicitudes finalizadas</h2>
                     </div>
                    
                     `;
@@ -138,10 +197,11 @@ $(document).ready(function () {
     // Mostrar solicitudes con el estado Finalizado
     function verFinalizadoCancelado(){
         $.ajax({
-            url: '../bdd/scriptusuario.php?historial=true&estado=3',
+            url: '../bdd/scriptusuario.php?finalizadocancelado=true&estado=3',
+            async: false, 
             type: 'GET',
             beforeSend: function (xhr) {
-                
+                $("#loadtabla").fadeIn("slow");
             },
             success: function (response) {
                 
@@ -149,7 +209,7 @@ $(document).ready(function () {
                     template = '';
                     template += `
                     <div class="cabecera">
-                    <h2 class="txt txt__cabecera">No hay solicitudes finalizadas en este momento</h2>
+                    <h2 class="txt txt__cabecera">No hay solicitudes finalizadas</h2>
                     </div>
                     <br>
                     <br>
@@ -199,7 +259,8 @@ $(document).ready(function () {
         });   
         
         $.ajax({
-            url: '../bdd/scriptusuario.php?historial=true&estado=4',
+            url: '../bdd/scriptusuario.php?finalizadocancelado=true&estado=4',
+            async: false, 
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -210,7 +271,7 @@ $(document).ready(function () {
                     
                     template += `
                     <div class="cabecera">
-                    <h2 class="txt txt__cabecera">No hay solicitudes canceladas en este momento</h2>
+                    <h2 class="txt txt__cabecera">No hay solicitudes canceladas</h2>
                     </div>
                     `;
                     $('#card').html(template);
@@ -259,65 +320,8 @@ $(document).ready(function () {
     }
 
     // Filtrar solicitudes con el estado Espera
-    function filtrarEsperaAtencion(fechainicio,fechafin){
+    function filtrarRecientes(fechainicio,fechafin){
         let template = '';
-        $.ajax({
-            url: '../bdd/scriptusuario.php?filtrar=true&estado=1&inicio='+fechainicio+'&fin='+fechafin,
-            type: 'GET',
-            
-            success: function (response) {
-                
-                if (response === '[]') {
-                    template += `
-                    <div class="cabecera">
-                    <h2 class="txt txt__cabecera">No hay solicitudes en espera en este momento</h2>
-                    </div>
-                    <br>
-                    <br>
-                    `;
-                    $('#card').html(template);
-                }else{
-                    const personas = JSON.parse(response);
-                    template = '';
-                    personas.forEach(persona => {
-                        template += `
-                        <div class="cabecera three__fragment">
-                            <h2 class="txt txt__cabecera">Folio de solicitud: ${persona.folio}</h2>
-                            <h2 class="txt txt__cabecera ${persona.estado}">Estado: ${persona.estado}</h2>
-                            <button id="btn-cancelar" class="btn btn__cabecera" folio="${persona.folio}"> <i class="fa-solid fa-ban"></i> Cancelar Reporte</button>
-                        </div>
-                        <div class="cuerpo">
-                            <table>
-                                <!-- Encabezado de tabla -->
-                                <thead class="headt">
-                                    <tr id="header">
-                                        <th>MENSAJE ENVIADO</th>
-                                        <th>RESPUESTA</th>
-                                    </tr>
-                                </thead>
-                                <!-- Contenido de la tabla  -->
-                                <tbody class="bodyt">
-                                    <tr>
-                                        <td>${persona.descripcion}</td>
-                                        <td>${persona.respuesta}</td>
-                                    <tr/>
-                                    <tr>
-                                        <td>FECHA DE ENVIO: ${persona.fecha}</td>
-                                        <td>FECHA DE RESPUESTA: ${persona.fecha_respuesta}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>TIPO DE REPORTE: ${persona.tipo}</td>
-                                        <td>USUARIO QUE RESPONDE: ${persona.usuario}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        `
-                        $('#card').html(template);
-                    })
-                }
-            } 
-        });
 
         $.ajax({
             url: '../bdd/scriptusuario.php?filtrar=true&estado=2&inicio='+fechainicio+'&fin='+fechafin,
@@ -377,6 +381,67 @@ $(document).ready(function () {
                 }
             }
         });     
+
+        $.ajax({
+            url: '../bdd/scriptusuario.php?filtrar=true&estado=1&inicio='+fechainicio+'&fin='+fechafin,
+            async: false, 
+            type: 'GET',
+            
+            success: function (response) {
+                
+                if (response === '[]') {
+                    template += `
+                    <div class="cabecera">
+                    <h2 class="txt txt__cabecera">No hay solicitudes en espera en este momento</h2>
+                    </div>
+                    <br>
+                    <br>
+                    `;
+                    $('#card').html(template);
+                }else{
+                    const personas = JSON.parse(response);
+                    template = '';
+                    personas.forEach(persona => {
+                        template += `
+                        <div class="cabecera three__fragment">
+                            <h2 class="txt txt__cabecera">Folio de solicitud: ${persona.folio}</h2>
+                            <h2 class="txt txt__cabecera ${persona.estado}">Estado: ${persona.estado}</h2>
+                            <button id="btn-cancelar" class="btn btn__cabecera" folio="${persona.folio}"> <i class="fa-solid fa-ban"></i> Cancelar Reporte</button>
+                        </div>
+                        <div class="cuerpo">
+                            <table>
+                                <!-- Encabezado de tabla -->
+                                <thead class="headt">
+                                    <tr id="header">
+                                        <th>MENSAJE ENVIADO</th>
+                                        <th>RESPUESTA</th>
+                                    </tr>
+                                </thead>
+                                <!-- Contenido de la tabla  -->
+                                <tbody class="bodyt">
+                                    <tr>
+                                        <td>${persona.descripcion}</td>
+                                        <td>${persona.respuesta}</td>
+                                    <tr/>
+                                    <tr>
+                                        <td>FECHA DE ENVIO: ${persona.fecha}</td>
+                                        <td>FECHA DE RESPUESTA: ${persona.fecha_respuesta}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TIPO DE REPORTE: ${persona.tipo}</td>
+                                        <td>USUARIO QUE RESPONDE: ${persona.usuario}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        `
+                        $('#card').html(template);
+                    })
+                }
+            } 
+        });
+
+        
     }
 
     // Filtrar solicitudes con el estado Finalizado
@@ -506,7 +571,7 @@ $(document).ready(function () {
     $(document).on('click', '#estado-filter', function (e) {
         e.preventDefault();
         if (seleccion[0].checked) {
-            verEsperaAtencion();
+            verRecientes();
         } else if (seleccion[1].checked) {
             verFinalizadoCancelado();
         } else {
@@ -526,7 +591,7 @@ $(document).ready(function () {
                 if(Date.parse(fechafin) < Date.parse(fechainicio)) {
                     alert('La fecha final debe ser mayor o igual a la fecha de inicio'); 
                 }else{
-                    filtrarEsperaAtencion(fechainicio,fechafin);
+                    filtrarRecientes(fechainicio,fechafin);
                 }
             }
         } else if (seleccion[1].checked) {

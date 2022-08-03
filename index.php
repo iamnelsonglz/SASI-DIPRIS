@@ -14,7 +14,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/imagenes/favicon.ico" />
-    <title>SASI | Sistema para Atención de Solicitud Informática</title>
+    <title> SASI | Sistema para Atención de Solicitud Informática </title>
     <link rel="stylesheet" href="/css/styleLogin.css">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/login.js"></script>
@@ -22,9 +22,9 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
 
 <body>
     <div class="header">
-        <h1 class="title" id="saludo">Bienvenido al SASI</h1>
+        <h1 class="title" id="saludo">Bienvenido a SASI</h1>
     </div>
-        
+    <br>    
     <div class="contenido fragment">
         <div class="imagen">
             <img class="img" src="/imagenes/logosalud.png">
@@ -62,6 +62,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
     </div>
 
 </body>
+
 </html>
 
 <?php

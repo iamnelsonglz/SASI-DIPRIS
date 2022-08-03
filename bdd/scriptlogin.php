@@ -28,7 +28,7 @@ function login($user, $pass)
     if (!empty($user) && !empty($pass)) {
         $search_query = "SELECT username,categoria.tipo AS tipo FROM Usuario 
         inner join categoria ON Usuario.categoria = categoria.idCategoria
-        WHERE username='$user' AND password='$pass' LIMIT 1";
+        WHERE username = BINARY '$user' AND password= BINARY  '$pass' LIMIT 1";
         $result = $mysqli->query($search_query);
         if (!$result) {
             echo "";
