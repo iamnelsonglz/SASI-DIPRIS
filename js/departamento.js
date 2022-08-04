@@ -5,6 +5,7 @@ $(document).ready(function () {
     function obtenerDepartamentos() {
         $.ajax({
             url: '../bdd/scriptdepartamento.php?select',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -90,8 +91,9 @@ $(document).ready(function () {
             $.post('../bdd/scriptdepartamento.php', postData, function (response) {
                 alert(response);
                 obtenerDepartamentos();
+                cerrarModal();
             });
-            cerrarModal();
+            
         }
         
     })
@@ -105,6 +107,7 @@ $(document).ready(function () {
             $.ajax({
                 // dirección a la que se mandan los datos
                 url: '../bdd/scriptdepartamento.php',
+                async: false,
                 // type: 'POST' para enviar | type: 'GET' para recibir
                 type: 'POST',
                 // datos que se envian
@@ -166,8 +169,9 @@ $(document).ready(function () {
                 $.post('../bdd/scriptdepartamento.php', postData, function (response) {
                     alert(response);
                     obtenerDepartamentos();
+                    cerrarModal();
                 });
-                cerrarModal();
+                
             } else {
                
             }
@@ -190,8 +194,9 @@ $(document).ready(function () {
                 $.post('../bdd/scriptdepartamento.php', postData, function (response) {
                     alert(response);
                     obtenerDepartamentos();
+                    cerrarModal();
                 });
-                cerrarModal();
+                
             }else{
 
             }

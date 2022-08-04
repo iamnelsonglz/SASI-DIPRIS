@@ -5,6 +5,7 @@ $(document).ready(function () {
     function obtenerTipoProblema() {
         $.ajax({
             url: '../bdd/scripttipoproblema.php?select',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -85,8 +86,8 @@ $(document).ready(function () {
             $.post('../bdd/scripttipoproblema.php', postData, function (response) {
                 alert(response);
                 obtenerTipoProblema();
+                cerrarModal();
             });
-            cerrarModal();
         }
 
     })
@@ -100,6 +101,7 @@ $(document).ready(function () {
         $.ajax({
             // dirección a la que se mandan los datos
             url: '../bdd/scripttipoproblema.php',
+            async: false,
             // type: 'POST' para enviar | type: 'GET' para recibir
             type: 'POST',
             // datos que se envian
@@ -161,8 +163,8 @@ $(document).ready(function () {
                 $.post('../bdd/scripttipoproblema.php', postData, function (response) {
                     alert(response);
                     obtenerTipoProblema();
+                    cerrarModal();
                 });
-                cerrarModal();
             } else {
 
             }
@@ -185,8 +187,8 @@ $(document).ready(function () {
                 $.post('../bdd/scripttipoproblema.php', postData, function (response) {
                     alert(response);
                     obtenerTipoProblema();
+                    cerrarModal();
                 });
-                cerrarModal();
             } else {
 
             }

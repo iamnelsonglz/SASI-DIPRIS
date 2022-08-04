@@ -6,6 +6,7 @@ $(document).ready(function () {
         let thead = '';
         $.ajax({
             url: '../bdd/scriptpersonal.php?select',
+            async: false,
             type: 'GET',
             beforeSend: function (xhr) {
                 $("#loadtabla").fadeIn("slow");
@@ -56,6 +57,7 @@ $(document).ready(function () {
     function obtenerDepartamento() {
         $.ajax({
             url: '../bdd/scriptpersonal.php?depto',
+            async: false,
             type: 'GET',
             success: function (response) {
                 const personas = JSON.parse(response);
@@ -74,6 +76,7 @@ $(document).ready(function () {
     function obtenerTipo() {
         $.ajax({
             url: '../bdd/scriptpersonal.php?tipo',
+            async: false,
             type: 'GET',
             success: function (response) {
                 const personas = JSON.parse(response);
@@ -198,6 +201,7 @@ $(document).ready(function () {
         $.ajax({
             // dirección a la que se mandan los datos
             url: '../bdd/scriptpersonal.php',
+            async: false,
             // type: 'POST' para enviar | type: 'GET' para recibir
             type: 'POST',
             // datos que se envian
@@ -324,8 +328,9 @@ $(document).ready(function () {
                 $.post('../bdd/scriptpersonal.php', postData, function (response) {
                     alert(response);
                     obtenerPersonal();
+                    cerrarModal();
                 });
-                cerrarModal();
+            
             } else {
                 
             }
@@ -348,8 +353,9 @@ $(document).ready(function () {
                 $.post('../bdd/scriptpersonal.php', postData, function (response) {
                     alert(response);
                     obtenerPersonal();
+                    cerrarModal();
                 });
-                cerrarModal();
+        
             }
         }
        
