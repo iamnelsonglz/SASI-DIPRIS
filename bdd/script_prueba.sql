@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `bdreportes`.`Departamento` (
   `nombre` VARCHAR(100) NOT NULL,
   `planta` INT NOT NULL,
   PRIMARY KEY (`idDepartamento`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `bdreportes`.`Categoria` (
   `nombre` VARCHAR(20) NOT NULL,
   `tipo` INT NOT NULL,
   PRIMARY KEY (`idCategoria`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS `bdreportes`.`Usuario` (
   `categoria` INT NOT NULL,
   `departamento` INT NOT NULL,
   PRIMARY KEY (`username`),
-  INDEX `fk_Usuario_Departamento_idx` (`departamento` ASC) VISIBLE,
-  INDEX `fk_Usuario_Categoria1_idx` (`categoria` ASC) VISIBLE,
+  INDEX `fk_Usuario_Departamento_idx` (`departamento` ASC) ,
+  INDEX `fk_Usuario_Categoria1_idx` (`categoria` ASC) ,
   CONSTRAINT `fk_Usuario_Departamento`
     FOREIGN KEY (`departamento`)
     REFERENCES `bdreportes`.`Departamento` (`idDepartamento`)
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `bdreportes`.`Tipo_reporte` (
   `nombre` VARCHAR(100) NOT NULL,
   `prioridad` INT NOT NULL,
   PRIMARY KEY (`idTipo`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `bdreportes`.`Estado` (
   `idEstado` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`idEstado`),
-  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) VISIBLE)
+  UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC) )
 ENGINE = InnoDB;
 
 
@@ -118,10 +118,10 @@ CREATE TABLE IF NOT EXISTS `bdreportes`.`Reporte` (
   `respuesta` VARCHAR(280) NULL,
   `usuario_responde` VARCHAR(20) NOT NULL DEFAULT 'root',
   PRIMARY KEY (`folio`, `usuario_reporta`),
-  INDEX `fk_Reporte_Tipo_reporte1_idx` (`tipo` ASC) VISIBLE,
-  INDEX `fk_Reporte_Estado1_idx` (`estado` ASC) VISIBLE,
-  INDEX `fk_Reporte_Usuario1_idx` (`usuario_reporta` ASC) VISIBLE,
-  INDEX `fk_Reporte_Usuario2_idx` (`usuario_responde` ASC) VISIBLE,
+  INDEX `fk_Reporte_Tipo_reporte1_idx` (`tipo` ASC) ,
+  INDEX `fk_Reporte_Estado1_idx` (`estado` ASC) ,
+  INDEX `fk_Reporte_Usuario1_idx` (`usuario_reporta` ASC) ,
+  INDEX `fk_Reporte_Usuario2_idx` (`usuario_responde` ASC) ,
   CONSTRAINT `fk_Reporte_Tipo_reporte1`
     FOREIGN KEY (`tipo`)
     REFERENCES `bdreportes`.`Tipo_reporte` (`idTipo`)
