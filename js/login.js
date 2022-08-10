@@ -33,36 +33,15 @@ $(document).ready(function () {
                 password: $('#password').val()
             };
             $.post('../bdd/scriptlogin.php', postData, function (response) {
-                if (response === "") {
+                if (response === "0") {
                     alert("Usuario o contraseña incorrectos");
                 } else {
                     window.location.href = "/inicio.php";
-                    /*
-                    let personal = JSON.parse(response);
-                    personal.forEach(persona => {
-                        type = persona.tipo;
-                    });
-                    // Abre la página según el tipo de usuario
-                    switch (type) {
-                        case "1":
-                            window.location.href = "/Inicio.php";
-                            break;
-                        case "2":
-                            window.location.href = "/Inicio.php";
-                            break;
-                        case "3":
-                            window.location.href = "/Inicio.php";
-                            break;
-                        default:
-                            alert("Error en datos de usuario");
-                            break;
-                    }
-                    */
                     $('.formulario_registre').trigger('reset');
                 }
 
             });
         }
-        //window.location.href = "../Departamentos/Index.php"; 
+        
     })
 });

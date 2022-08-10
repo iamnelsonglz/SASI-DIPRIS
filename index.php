@@ -1,8 +1,12 @@
 <?php
 session_start();
 if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
-    header("Location: /inicio.php");
-    die();
+    if($_SESSION['username'] == $_COOKIE['username']){
+        header("Location: /inicio.php");
+        die();
+    }else{
+        
+    }    
 } else {
 ?>
 
@@ -34,7 +38,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['tipo'])) {
             <form>
                 <div class="control">
                     <label for="username">Nombre</label>
-                    <input type="text" name="username" id="username">
+                    <input type="text" name="username" id="username" value="<?php if(isset($_COOKIE['username'])){echo $_COOKIE['username']; } ?>">
                 </div>
                 <div class="control">
                     <label for="password">Contraseña</label>
